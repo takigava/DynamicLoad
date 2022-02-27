@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\DynamicLoad.Module2\DynamicLoad.Module2.csproj" />
+		<ProjectReference Include="..\Modules\DynamicLoad.Module1\DynamicLoad.Module1.csproj" />
+		<ProjectReference Include="..\Shared\DynamicLoad.Contracts\DynamicLoad.Contracts.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<BlazorWebAssemblyLazyLoad Include="DynamicLoad.Module1.dll" />
+		<BlazorWebAssemblyLazyLoad Include="DynamicLoad.Module2.dll" />
+	</ItemGroup>
+
+</Project>

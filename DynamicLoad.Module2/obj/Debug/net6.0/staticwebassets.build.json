@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "D0Q1cFx2o4k2vGG8njrRJHB+vsrWaXuMvcXRiMWesE8=",
+  "Source": "DynamicLoad.Module2",
+  "BasePath": "_content/DynamicLoad.Module2",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "DynamicLoad.Module2\\wwwroot",
+      "Source": "DynamicLoad.Module2",
+      "ContentRoot": "C:\\Projects\\DynamicLoad\\DynamicLoad.Module2\\wwwroot\\",
+      "BasePath": "_content/DynamicLoad.Module2",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

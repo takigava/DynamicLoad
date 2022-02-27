@@ -1,0 +1,18 @@
+﻿@using Microsoft.Extensions.DependencyInjection
+<h3>MainView 1</h3>
+
+@code {
+    private static IServiceCollection _services { get; set; }
+
+    public MainView(IServiceCollection serviceCollection)
+    {
+        _services = serviceCollection;
+
+        base.OnInitialized();
+    }
+
+    public MainView()
+    {
+
+    }
+}

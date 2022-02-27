@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.Extensions.DependencyInjection
+
+<div class="nav-item px-3">
+    <NavLink class="nav-link" href="#">
+        <span class="oi oi-list-rich" aria-hidden="true"></span> Module 1
+    </NavLink>
+</div>
+
+@code {
+    private static IServiceCollection _services { get; set; }
+
+    public TreeView(IServiceCollection serviceCollection)
+    {
+        _services = serviceCollection;
+
+        base.OnInitialized();
+    }
+
+    public TreeView()
+    {
+
+    }
+}

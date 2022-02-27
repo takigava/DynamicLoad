@@ -1,0 +1,61 @@
+﻿@using DynamicLoad.Contracts
+@using DynamicLoad.Contracts.Services
+@using Microsoft.AspNetCore.Components.WebAssembly.Services
+@using System.Reflection
+
+@inject LazyAssemblyLoader AssemblyLoader
+
+<Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@lazyLoadedAssemblies"
+        OnNavigateAsync="@OnNavigateAsync">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code{
+    private List<Assembly> lazyLoadedAssemblies = new();
+
+    [Parameter]
+    public IServiceCollection Services { get; set; }
+
+    private async Task OnNavigateAsync(NavigationContext args)
+    {
+        try
+        {
+            if (String.IsNullOrWhiteSpace(args.Path))
+            {
+                var assemblies = await AssemblyLoader.LoadAssembliesAsync(new[] { "DynamicLoad.Module1.dll", "DynamicLoad.Module2.dll" });
+
+                lazyLoadedAssemblies.AddRange(assemblies);
+
+                foreach (Assembly assembly in lazyLoadedAssemblies)
+                {
+                    foreach (Type mytype in assembly.GetTypes()
+                     .Where(mytype => mytype.GetInterfaces().Contains(typeof(ICommonModuleService))))
+                    {
+                        Services.AddTransient(typeof(ICommonModuleService), (provider) =>
+                        {
+                            return mytype.GetConstructors()[0].Invoke(new object[] { Services });
+                        });
+                    }
+                }
+
+                Services.AddTransient(typeof(IModuleService), (provider) =>
+                {
+                    return new ModuleService(Services);
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.ToString());
+        }
+    }
+}

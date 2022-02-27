@@ -1,0 +1,68 @@
+﻿@using DynamicLoad.Contracts
+@using Microsoft.Extensions.DependencyInjection
+@using DynamicLoad.Module2.Components
+
+<h3>MainView 2</h3>
+
+<button onclick="@(()=>ShowDC(true))">First dynamic component</button>
+<button onclick="@(()=>ShowDC(false))">Second dynamic component</button>
+
+@if (componentType != null && parameters != null)
+{
+    <DynamicComponent Type="@componentType" Parameters="@parameters" @ref="dc" />
+}
+
+@code {
+    private static IServiceCollection _services { get; set; }
+
+    private DynamicComponent dc;
+    private Type componentType;
+    private IDictionary<string, object> parameters;
+
+    public MainView(IServiceCollection serviceCollection)
+    {
+        _services = serviceCollection;
+
+        base.OnInitialized();
+    }
+
+    public MainView()
+    {
+
+    }
+
+    private void ShowDC(bool isFirst)
+    {
+        string typeName = String.Empty;
+
+        if (isFirst)
+        {
+            typeName = nameof(DCText1);
+        }
+        else
+        {
+            typeName = nameof(DCText2);
+        }
+
+        if (dc != null && dc.Instance != null && dc.Type.Name == typeName)
+        {
+            (dc?.Instance as IDCVisible)?.SetVisible(true);
+            return;
+        }
+
+        if (isFirst)
+        {
+            componentType = typeof(DCText1);
+            parameters = new Dictionary<string, object>();
+            parameters.Add("Visible", true);
+        }
+        else
+        {
+            componentType = typeof(DCText2);
+            parameters = new Dictionary<string, object>();
+            parameters.Add("Visible", true);
+        }
+
+        this.StateHasChanged();
+    }
+}

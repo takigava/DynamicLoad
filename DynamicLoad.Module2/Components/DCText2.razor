@@ -1,0 +1,15 @@
+﻿@using DynamicLoad.Contracts
+@implements IDCVisible
+
+<h3 style="display:@(Visible?"":"none")">Dynamic component text 2</h3>
+
+@code {
+    [Parameter]
+    public bool Visible { get; set; }
+
+    public void SetVisible(bool visible)
+    {
+        Visible = visible;
+        InvokeAsync(StateHasChanged);
+    }
+}

@@ -1,0 +1,48 @@
+﻿@using DynamicLoad.Client.Services
+@using DynamicLoad.Contracts
+@using DynamicLoad.Contracts.Classes
+
+@inherits LayoutComponentBase
+
+@inject DIContainerService ContainerServices
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu CurrentModule="@currentModule" Services="@ContainerServices.Services"/>
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        @foreach (ModuleInfo info in moduleService.GetModuleInfos())
+        {
+            <div class="top-row px-4">
+                <a href="#" onclick="@(()=>ChangeModule(info.Module_GId))">@info.Name</a>
+            </div>
+        }
+
+        <article class="content px-4">
+            @Body
+
+            @moduleService.CreateAndGetMainView(currentModule)
+        </article>
+    </main>
+</div>
+
+@code{
+    private Guid currentModule;
+    private IModuleService moduleService;
+
+    protected override void OnInitialized()
+    {
+        moduleService = ContainerServices.Services.BuildServiceProvider().GetService<IModuleService>();
+        this.currentModule = moduleService.GetModuleInfos().FirstOrDefault().Module_GId;
+    }
+
+    private void ChangeModule(Guid moduleId)
+    {
+        this.currentModule = moduleId;
+    }
+}
