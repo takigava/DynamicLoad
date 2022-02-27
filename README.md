@@ -1,0 +1,2 @@
+# DynamicLoad
+Blazor dynamic components
