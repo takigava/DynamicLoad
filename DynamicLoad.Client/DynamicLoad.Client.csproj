@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\DynamicLoad.Module2\DynamicLoad.Module2.csproj" />
+		<ProjectReference Include="..\Modules\DynamicLoad.Module2\DynamicLoad.Module2.csproj" />
 		<ProjectReference Include="..\Modules\DynamicLoad.Module1\DynamicLoad.Module1.csproj" />
 		<ProjectReference Include="..\Shared\DynamicLoad.Contracts\DynamicLoad.Contracts.csproj" />
 	</ItemGroup>

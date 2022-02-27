@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Shared\DynamicLoad.Contracts\DynamicLoad.Contracts.csproj" />
+		<ProjectReference Include="..\..\Shared\DynamicLoad.Contracts\DynamicLoad.Contracts.csproj" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
