@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicLoad.Contracts", "Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicLoad.Module1", "Modules\DynamicLoad.Module1\DynamicLoad.Module1.csproj", "{F7766E8D-5AB7-440A-A6AE-5C83DC2C71A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicLoad.Module2", "DynamicLoad.Module2\DynamicLoad.Module2.csproj", "{578FCC46-1B26-483C-8381-560DF71EFE37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicLoad.Module2", "Modules\DynamicLoad.Module2\DynamicLoad.Module2.csproj", "{578FCC46-1B26-483C-8381-560DF71EFE37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
